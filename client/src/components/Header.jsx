@@ -3,6 +3,7 @@ import {Link, useLocation} from 'react-router-dom'
 import React from 'react'
 import { AiOutlineSearch } from "react-icons/ai";
 import { FaMoon } from "react-icons/fa";
+import './Header.css'
 
 
 function Header() {
@@ -30,7 +31,7 @@ function Header() {
                 <FaMoon />
             </Button>
             <Link to='SignIn'>
-                <Button gradientDuoTone='purpleToBlue' color='red' >
+                <Button gradientDuoTone='purpleToBlue' color='red' outline>
                     Sign In 
                 </Button>
             </Link>
