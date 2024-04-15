@@ -1,10 +1,13 @@
-import { Button, Label, Spinner, TextInput } from 'flowbite-react';
+import { Alert, Button, Label, Spinner, TextInput } from 'flowbite-react';
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { signInStart, signInFailure, signInSuccess } from '../redux/user/userSlice';
 
 function SignIn() {
-  const [errorMessage, setErrorMessage ] = useState(null)
-  const [loading, setLoading ] = useState(false)
+  const{loading, error: errorMessage} = useSelector(state => state.user)
+  const dispatch = useDispatch()
   const[formData, setFormData] = useState({})
   const navigate = useNavigate() ;
   function handleChange(e) {
@@ -15,12 +18,11 @@ function SignIn() {
   const handleSubmit = async(e) => {
     e.preventDefault();
     if(!formData.email ||!formData.password ) {
-      return setErrorMessage('Please Fill Out All The Fields')
+      return dispatch(signInFailure('Please Fill all the Fields'))
       
     }
     try {
-      setLoading(true);
-      setErrorMessage(null)
+      dispatch(signInStart())
       const res = await fetch('/api/auth/signin', {
         method: 'POST',
         headers: {'content-Type': 'application/json'},
@@ -28,15 +30,14 @@ function SignIn() {
       });
       const data = await res.json();
       if(data.success === false ) {
-        return setErrorMessage(data.message)
+        dispatch(signInFailure(data.message))
       }
-      setLoading(false)
       if(res.ok) {
+        dispatch(signInSuccess(data))
         navigate('/')
       }
     } catch (error) {
-      setErrorMessage(error.message)
-      setLoading(false)
+      dispatch(signInFailure(error.message))
     }
   }
 
@@ -86,14 +87,14 @@ function SignIn() {
                     <Spinner size='sm'  />
                     <span className='pl-3'> Loading...</span> 
                     </> 
-                    ) : 'Sign UP'                   
+                    ) : 'Sign In'                   
                 }
                 </Button>
             </div>
           </form>
           <div className="flex gap-2 text-sm mt-5 font-semibold">
             Dont Have an account ?
-            <Link to='/signIn' className='text-blue-500'> Sign Up </Link>
+            <Link to='/signup' className='text-blue-500'> Sign Up </Link>
           </div>
             {
               errorMessage && (
