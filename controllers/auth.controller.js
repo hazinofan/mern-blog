@@ -77,4 +77,42 @@ export const signin = async (req, res, next) => {
 
 }
 
+
+export const google = async (req,res,next) => {
+    const {email, name, googlePhotoUrl} = req.body
+    try {
+        console.log(email)
+        console.log('Connecting to MongoDB:', process.env.MONGO);
+
+        const user = await User.findOne({ email });
+        console.log('User:', user);
+        if(user){
+            const token = jwt.sign({id: user._id}, process.env.JWT_SECRET)
+            const {password, ...rest} = user._doc ;
+            res.status(200).cookie('access_token', token, {
+                httpOnly: true,
+            }).json(rest)
+        } else {
+            const generatePassword = Math.random().toString(36).slice(-8)
+            const hanshedPassword = bcryptjs.hashSync(generatePassword, 10)
+            const newUser = new User({
+                username: name.toLowerCase().split('').join('') +
+                Math.random().toString(36).slice(-4),
+                email,
+                password : hanshedPassword,
+                profilPicture : googlePhotoUrl,
+            })
+            await newUser.save()
+            const token = jwt.sign({id: newUser._id}, process.env.JWT_SECRET);
+            const {password, ...rest} = newUser._doc ;
+            res.status(200).cookie('access_token', token, {
+                httpOnly: true,
+            }).json(rest)
+        }
+    } catch (error) {
+        console.log(error)
+        next(error)
+    }
+}
+
 export default router;
