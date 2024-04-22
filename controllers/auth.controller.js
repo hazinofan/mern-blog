@@ -83,8 +83,8 @@ export const google = async (req,res,next) => {
     try {
         console.log(email)
         console.log('Connecting to MongoDB:', process.env.MONGO);
-
         const user = await User.findOne({ email });
+        console.log(user)
         console.log('User:', user);
         if(user){
             const token = jwt.sign({id: user._id}, process.env.JWT_SECRET)
