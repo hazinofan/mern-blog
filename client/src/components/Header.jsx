@@ -11,7 +11,7 @@ import { toggleTheme } from '../redux/theme/themeSlice';
 function Header() {
     const path = useLocation().pathname;
     const dispatch = useDispatch() ;
-    const { theme } = useSelector((state) => state.user)
+    const { theme } = useSelector((state) => state.theme)
     const {currentUser} = useSelector(state => state.user)
   return (
     <Navbar className='border-b-2'>
@@ -39,6 +39,7 @@ function Header() {
                 onClick={() => dispatch(toggleTheme())}
             >
                 {theme === 'light' ? <FaRegSun /> :<FaMoon /> }
+                
             </Button>
             {currentUser ? (
                 <Dropdown

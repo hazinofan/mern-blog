@@ -1,5 +1,4 @@
-import mongoose from "mongoose";
-import { type } from "os";
+import mongoose from "mongoose";    
 
 const userSchema = new mongoose.Schema({
     username :{
@@ -17,7 +16,7 @@ const userSchema = new mongoose.Schema({
     },
     ProfilPicture :{
         type : String,
-        default : "",
+        default : "https://parimatchnews.com/wp-content/uploads/2021/01/Screenshot_1-634x640.png",
     },
 }, {timestamps: true}
 );
