@@ -16,14 +16,12 @@ function DashSide() {
   return (
     <Sidebar className='w-full md:w-56'>
         <Sidebar.ItemGroup>
-            <Link to='/Dashboard?tab=profile' >
-            <Sidebar.Item className='mb-3' active={tab === 'profile'} icon={HiUser} label={"User"} labelColor='dark'>
+            <Sidebar.Item href='/Dashboard?tab=profile' className='mb-3' active={tab === 'profile'} icon={HiUser} label={"User"} labelColor='dark'>
                 Profile 
             </Sidebar.Item>
             <Sidebar.Item className=' cursor-pointer' icon={HiArrowSmRight}>
                 Sign Out 
             </Sidebar.Item>
-            </Link>
         </Sidebar.ItemGroup>
     </Sidebar>
   )
