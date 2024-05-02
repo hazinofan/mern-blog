@@ -16,8 +16,12 @@ const userSchema = new mongoose.Schema({
     },
     ProfilPicture :{
         type : String,
-        default : "https://parimatchnews.com/wp-content/uploads/2021/01/Screenshot_1-634x640.png",
+        default : "https://styles.redditmedia.com/t5_2qh4a/styles/communityIcon_7kecd4uf4a3c1.png",
     },
+    isAdmin: {
+        type: Boolean,
+        default: false,
+    }
 }, {timestamps: true}
 );
 
