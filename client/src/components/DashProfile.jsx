@@ -4,9 +4,10 @@ import { TextInput, Button, Alert, Modal } from 'flowbite-react'
 import {updateFailure,signoutSuccess, updateStart, updateSuccess, deleteUserStart, deleteUserSuccess,deleteUserFailure} from '../redux/user/userSlice'
 import { useDispatch } from 'react-redux'
 import { HiOutlineExclamationCircle } from "react-icons/hi";
+import {Link} from 'react-router-dom'
 
 function DashProfile() {
-  const {currentUser,error } = useSelector(state => state.user)
+  const {currentUser,error, loading } = useSelector(state => state.user)
   const [formData, setFormData] = useState({});
   const dispatch = useDispatch()
   const [updateUserSuccess, setUpdateUserSuccess] = useState(null)
@@ -81,6 +82,11 @@ function DashProfile() {
   return (
     <div className='max-w-lg mx-auto p-3 w-full'>
       <h1 className='my-7 text-center font-semibold text-3xl'>  Profile</h1>
+      {
+        currentUser.isAdmin && (
+          <span className='flex m-auto font-semibold justify-center mb-8 text-red-400'> Admin </span>
+        )
+      }
       <form onSubmit={handleSubmit} className=' flex flex-col gap-4' >
         <div className='w-32 h-32 self-center cursor-pointer shadow-md overflow-hidden rounded-full'>
         <img 
@@ -93,8 +99,22 @@ function DashProfile() {
         <TextInput type='email' id='email' placeholder='Email' defaultValue={currentUser.email} onChange={handleChange}/>
         <TextInput type='password' id='password' placeholder='Password  ' onChange={handleChange}/>
         <Button type='Submit' gradientDuoTone='purpleToPink' outline>
-          Update
+          {loading ? 'Loading...' : 'Update'}
         </Button>
+        {
+        currentUser.isAdmin && (
+          <Link to='/create-post'>
+          <Button 
+          type='button'
+          gradientDuoTone='purpleToPink'
+          className='w-full'
+          disabled={loading}
+          >
+            Create Post
+          </Button>
+          </Link>
+        )
+      }
          <div className='text-red-500 flex justify-between mt-5'>
           <span className='cursor-pointer' onClick={() => setShowModal(true)}> Delete Account </span>
           <span className='cursor-pointer' onClick={handleSignOut}> Sign Out </span>
@@ -125,8 +145,7 @@ function DashProfile() {
                   <Button color='gray' onClick={()=> setShowModal(false)}>Yes i'm sure </Button>
                 </div>
                 </div>
-              </Modal.Body>
-            
+              </Modal.Body>   
          </Modal>
       </form>
     </div>
