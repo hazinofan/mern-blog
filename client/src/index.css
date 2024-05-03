@@ -1,12 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-
-body{
+/* Apply Roboto font to body */
+body {
+    font-family: 'Roboto', sans-serif;
     height: 100vh;
 }
 
-.ql-editor{
+/* Set font size for Quill editor */
+.ql-editor {
     font-size: 1.05rem;
 }
