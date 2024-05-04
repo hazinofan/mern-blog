@@ -86,7 +86,7 @@ function DashPosts() {
               </TableHead>
               {userPosts.map((post) => {
                 return(
-                <Table.Body className=' divide-y'>
+                <Table.Body key={post._id} className=' divide-y'>
                   <Table.Row className='bg-white dark:border-gray-700 dark:bg-gray-800'>
 
                   <Table.Cell>

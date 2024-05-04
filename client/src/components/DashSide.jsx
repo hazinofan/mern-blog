@@ -5,6 +5,7 @@ import { Link, useLocation } from 'react-router-dom'
 import { signoutSuccess } from '../redux/user/userSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { HiDocumentText } from "react-icons/hi";
+import { HiOutlineUserGroup } from "react-icons/hi";
 
 function DashSide() {
     const location = useLocation()
@@ -57,6 +58,17 @@ function DashSide() {
               icon={HiDocumentText}
               >
                    Posts
+              </Sidebar.Item>
+            ) }
+
+            {currentUser.isAdmin && (
+              <Sidebar.Item 
+              href='/Dashboard?tab=users' 
+              className='mb-3' 
+              active={tab === 'users'} 
+              icon={HiOutlineUserGroup}
+              > 
+                   Users
               </Sidebar.Item>
             ) }
 
