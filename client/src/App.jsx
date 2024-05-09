@@ -13,6 +13,7 @@ import AdminPrivateRoute from './components/AdminPrivateRoute'
 import CreatePost from './pages/CreatePost'
 import ErrorNavPage from './pages/ErrorNavPage'
 import UpdatePost from './pages/UpdatePost'
+import PostPage from './pages/PostPage'
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
         </Route>
         <Route path='/SignIn' element={<SignIn />}/>
         <Route path='/SignUp' element={<SignUp />}/>
+        <Route path='/post/:postSlug' element={<PostPage />}/>
         <Route path='/errorNavPage' element={<ErrorNavPage />}/>
       </Routes>   
       <Footer />
