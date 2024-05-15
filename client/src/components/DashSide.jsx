@@ -6,6 +6,7 @@ import { signoutSuccess } from '../redux/user/userSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { HiDocumentText } from "react-icons/hi";
 import { HiOutlineUserGroup } from "react-icons/hi";
+import { LiaCommentSolid } from "react-icons/lia";
 
 function DashSide() {
     const location = useLocation()
@@ -62,6 +63,7 @@ function DashSide() {
             ) }
 
             {currentUser.isAdmin && (
+              <>
               <Sidebar.Item 
               href='/Dashboard?tab=users' 
               className='mb-3' 
@@ -70,6 +72,15 @@ function DashSide() {
               > 
                    Users
               </Sidebar.Item>
+              <Sidebar.Item 
+              href='/Dashboard?tab=comments' 
+              className='mb-3' 
+              active={tab === 'Comments'} 
+              icon={LiaCommentSolid}
+              > 
+                   Comments
+              </Sidebar.Item>
+              </>
             ) }
 
             <Sidebar.Item 

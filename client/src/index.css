@@ -44,3 +44,9 @@ body {
   .dark .post-content a {
     color: red;
   }
+
+  @media (max-width: 960px) {
+    .son{
+      display: grid;
+    }
+  }

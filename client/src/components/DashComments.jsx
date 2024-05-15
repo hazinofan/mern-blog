@@ -2,25 +2,23 @@ import { Button, Modal, Table, TableHead, TableHeadCell } from 'flowbite-react';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { HiOutlineExclamationCircle } from "react-icons/hi";
-import { FaCheck } from "react-icons/fa";
-import { FaTimes } from "react-icons/fa";
 
 
-function DashUsers() {
+function DashComments() {
   const { currentUser } = useSelector((state) => state.user);
-  const [users, setUsers] = useState([]);
+  const [comments, setComments] = useState([]);
   const [showMore, setShowMore] = useState(true);
   const [showModal, setShowModal] = useState(false);
-  const [userIdToDelete, setUserIdToDelete] = useState('');
+  const [commentIdToDelete, setCommentIdToDelete] = useState('');
 
   useEffect(() => {
-    async function fetchUsers() {
+    async function fetchComments() {
       try {
-        const res = await fetch(`/api/user/getusers`);
+        const res = await fetch(`/api/comment/getComments`);
         const data = await res.json();
         if (res.ok) {
-          setUsers(data.users);
-          if (data.users.length < 9) {
+          setComments(data.comments);
+          if (data.comments.length < 9) {
             setShowMore(false);
           }
         }
@@ -30,20 +28,20 @@ function DashUsers() {
     }
 
     if(currentUser.isAdmin) {
-      fetchUsers(); 
+        fetchComments(); 
     }
   }, [currentUser._id]);
 
   async function handleShowMore() {
-    const startIndex = users.length;
+    const startIndex = comments.length;
     try {
       const res = await fetch(
-        `/api/user/getusers?startIndex=${startIndex}`
+        `/api/comment/getComments?startIndex=${startIndex}`
       );
       const data = await res.json();
       if (res.ok) {
-        setUsers((prev) => [...prev, ...data.users]);
-        if (data.users.length < 9) {
+        setComments((prev) => [...prev, ...data.comments]);
+        if (data.comments.length < 9) {
           setShowMore(false);
         }
       }
@@ -52,14 +50,14 @@ function DashUsers() {
     }
   }
 
-  const handleDeleteUser = async () => {
+  const handleDeleteComment = async () => {
     try {
-        const res = await fetch(`/api/user/delete/${userIdToDelete}`, {
+        const res = await fetch(`/api/comment/deleteComment/${commentIdToDelete}`, {
             method: 'DELETE',
         });
         const data = await res.json();
         if (res.ok) {
-            setUsers((prev) => prev.filter((user) => user._id !== userIdToDelete));
+            setComments((prev) => prev.filter((comment) => comment._id !== commentIdToDelete));
             setShowModal(false);
         } else {
             console.log(data.message);
@@ -71,35 +69,32 @@ function DashUsers() {
 
   return (
     <div className='table-auto overflow-x-scroll md:mx-auto p-3 scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500'>
-      {currentUser.isAdmin && users.length > 0 ? (
+      {currentUser.isAdmin && comments.length > 0 ? (
         <>
           <Table hoverable className='shadow-md'>
             <TableHead>
-              <TableHeadCell>Profile Picture</TableHeadCell>
-              <TableHeadCell>Username</TableHeadCell>
-              <TableHeadCell>Email</TableHeadCell>
-              <TableHeadCell>Admin</TableHeadCell>
-              <TableHeadCell>Date Created</TableHeadCell>
+              <TableHeadCell>Comment Content</TableHeadCell>
+              <TableHeadCell>Number of Likes</TableHeadCell>
+              <TableHeadCell>PostId</TableHeadCell>
+              <TableHeadCell>UserId</TableHeadCell>
+              <TableHeadCell>Date Updated</TableHeadCell>
               <TableHeadCell>Action</TableHeadCell>
             </TableHead>
-            {users.map((user) => {
+            {comments.map((comment) => {
               return(
-                <Table.Body key={user._id} className=' divide-y'>
+                <Table.Body key={comment._id} className=' divide-y'>
                   <Table.Row className='bg-white dark:border-gray-700 dark:bg-gray-800'>
                     <Table.Cell>
-                      <img 
-                        src={user.ProfilPicture} 
-                        alt={user.username}
-                        className='w-20 rounded-lg h-10 object-cover bg-gray-500' />
+                      {comment.content}
                     </Table.Cell>
-                    <Table.Cell>{user.username}</Table.Cell>
-                    <Table.Cell>{user.email}</Table.Cell>
-                    <Table.Cell>{user.isAdmin ? (<FaCheck className='  text-green-500'/>) : (<FaTimes className=' text-red-500' /> )}</Table.Cell>
-                    <Table.Cell>{new Date(user.createdAt).toLocaleDateString()}</Table.Cell>
+                    <Table.Cell>{comment.NumberOfLikes}</Table.Cell>
+                    <Table.Cell>{comment.postId}</Table.Cell>
+                    <Table.Cell>{comment.userId}</Table.Cell>
+                    <Table.Cell>{new Date(comment.updatedAt).toLocaleDateString()}</Table.Cell>
                     <Table.Cell>
                       <span onClick={() => {
                         setShowModal(true)
-                        setUserIdToDelete(user._id);
+                        setCommentIdToDelete(comment._id);
                       }} className='font-medium text-red-500 hover:underline cursor-pointer'>
                         Delete 
                       </span>
@@ -114,16 +109,16 @@ function DashUsers() {
           )}
         </>
       ) : (
-        <p>You have no Users Yet !</p>
+        <p>You have no Comments Yet !</p>
       )}
       <Modal show={showModal} onClose={()=>setShowModal(false)} popup size='md'>
             <Modal.Header />
               <Modal.Body>
                 <div className="text-center">
                 <HiOutlineExclamationCircle className='h-14 w-14 text-gray-400 dark:tex-gray-200 mb-4 mx-auto' />
-                <h3 className="mb-5 text-lg text-gray-500 dark:text-gray-400"> Are you sure You want to delete This User ? </h3>
+                <h3 className="mb-5 text-lg text-gray-500 dark:text-gray-400"> Are you sure You want to delete This Post ? </h3>
                 <div className="flex justify-center gap-4">
-                  <Button color='failure' onClick={handleDeleteUser}>Yes i'm sure </Button>
+                  <Button color='failure' onClick={handleDeleteComment}>Yes i'm sure </Button>
                   <Button color='gray' onClick={()=> setShowModal(false)}>No , Cancel </Button>
                 </div>
                 </div>
@@ -133,4 +128,4 @@ function DashUsers() {
   );
 }
 
-export default DashUsers;
+export default DashComments;
