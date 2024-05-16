@@ -1,3 +1,4 @@
+import { HiChartPie } from "react-icons/hi";
 import { Sidebar } from 'flowbite-react'
 import { useEffect, useState } from 'react'
 import { HiArrowSmRight, HiUser } from 'react-icons/hi'
@@ -39,7 +40,18 @@ function DashSide() {
   return (
     <Sidebar className='w-full md:w-56'>
         <Sidebar.ItemGroup className='flex flex-col'>
-
+            {currentUser && currentUser.isAdmin && (
+            <Link to='/dashboard?tab=dash' className='mb-3'>
+                <Sidebar.Item
+                    href='/Dashboard?tab=dash'
+                    icon={HiChartPie}
+                    active={tab === 'dash' || !tab}
+                    labelColor='dark'
+                >
+                    Dasboard
+                </Sidebar.Item>
+            </Link>
+            )}
             <Sidebar.Item 
             href='/Dashboard?tab=profile' 
             className='mb-3' 
