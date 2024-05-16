@@ -96,6 +96,7 @@ export const createComment = async (req, res, next) => {
     } catch (error) {
       next(error);
     }
+<<<<<<< HEAD
   };
 
   export const getcomments = async (req, res, next) => {
@@ -123,4 +124,6 @@ export const createComment = async (req, res, next) => {
     } catch (error) {
       next(error);
     }
+=======
+>>>>>>> 747f43977d568aa99013973260b0511904630643
   };
