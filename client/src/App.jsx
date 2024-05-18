@@ -15,6 +15,7 @@ import ErrorNavPage from './pages/ErrorNavPage'
 import UpdatePost from './pages/UpdatePost'
 import PostPage from './pages/PostPage'
 import ScrollToTop from './components/ScrollToTop'
+import Pricing from './components/Pricing'
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
         <Route path='/SignUp' element={<SignUp />}/>
         <Route path='/post/:postSlug' element={<PostPage />}/>
         <Route path='/errorNavPage' element={<ErrorNavPage />}/>
+        <Route path='/pricing' element={<Pricing />}/>
       </Routes>   
       <Footer />
     </BrowserRouter>

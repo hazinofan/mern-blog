@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { HiArrowNarrowUp, HiDocumentText } from "react-icons/hi";
-import { HiOutlineUserGroup } from "react-icons/hi";
+import { HiArrowNarrowUp, HiDocumentText, HiOutlineUserGroup } from "react-icons/hi";
 import { LiaCommentSolid } from 'react-icons/lia';
 import { Button, Table } from 'flowbite-react';
 import { Link } from 'react-router-dom';
@@ -123,9 +122,11 @@ function DashboardComponent() {
                 <div className="flex flex-col w-full md:w-auto shadow-md p-2 rounded-md dark:bg-gray-800">
                     <div className="flex justify-between p-3 text-sm font-semibold">
                         <h1 className="text-center p-2"> Recent Users</h1>
-                        <Button gradientDuoTone='purpleToPink' outline>
-                            <Link to={"/dashboard?tab=users"}> See All </Link>
-                        </Button>
+                        <Link to={"/Dashboard?tab=users"}>
+                            <Button gradientDuoTone='purpleToPink' outline>
+                                See All
+                            </Button>
+                        </Link>
                     </div>
                     <Table hoverable>
                         <Table.Head>
@@ -154,9 +155,11 @@ function DashboardComponent() {
                 <div className="flex flex-col w-full md:w-auto shadow-md p-2 rounded-md dark:bg-gray-800">
                     <div className="flex justify-between p-3 text-sm font-semibold">
                         <h1 className="text-center p-2"> Recent Comments</h1>
-                        <Button gradientDuoTone='purpleToPink' outline>
-                            <Link to={"/dashboard?tab=comments"}> See All </Link>
-                        </Button>
+                        <Link to={"/dashboard?tab=comments"}>
+                            <Button gradientDuoTone='purpleToPink' outline>
+                                See All
+                            </Button>
+                        </Link>
                     </div>
                     <Table hoverable>
                         <Table.Head>
@@ -181,9 +184,11 @@ function DashboardComponent() {
                 <div className="flex flex-col w-full md:w-auto shadow-md p-2 rounded-md dark:bg-gray-800">
                     <div className="flex justify-between p-3 text-sm font-semibold">
                         <h1 className="text-center p-2"> Recent Posts</h1>
-                        <Button gradientDuoTone='purpleToPink' outline>
-                            <Link to={"/dashboard?tab=posts"}> See All </Link>
-                        </Button>
+                        <Link to={"/dashboard?tab=posts"}>
+                            <Button gradientDuoTone='purpleToPink' outline>
+                                See All
+                            </Button>
+                        </Link>
                     </div>
                     <Table hoverable>
                         <Table.Head>
@@ -194,13 +199,13 @@ function DashboardComponent() {
                         {posts.map((post) => (
                             <Table.Body key={post._id} className='divide-y'>
                                 <Table.Row className='bg-white dark:border-gray-700 dark:bg-gray-800'>
-                                <Table.Cell>
-                                    <img
-                                        src={post.image}
-                                        alt="post"
-                                        className=' w-60 h-20 rounded-md bg-gray-500 object-cover'
-                                    />
-                                </Table.Cell>
+                                    <Table.Cell>
+                                        <img
+                                            src={post.image}
+                                            alt="post"
+                                            className=' w-60 h-20 rounded-md bg-gray-500 object-cover'
+                                        />
+                                    </Table.Cell>
                                     <Table.Cell>
                                         <p>{post.title}</p>
                                     </Table.Cell>

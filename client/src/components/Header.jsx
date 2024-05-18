@@ -1,15 +1,18 @@
+import { FaSignOutAlt } from "react-icons/fa";
 import { Avatar, Button, Dropdown, DropdownDivider, Navbar, TextInput } from 'flowbite-react'
 import {Link, useLocation} from 'react-router-dom'
-import React from 'react'
+import React, { useState } from 'react'
 import { AiOutlineSearch } from "react-icons/ai";
 import { FaMoon } from "react-icons/fa";
 import { FaRegSun } from "react-icons/fa6";
 import { useSelector, useDispatch } from 'react-redux'
 import { toggleTheme } from '../redux/theme/themeSlice';
 import { signoutSuccess } from '../redux/user/userSlice';
-
-
-
+import { HiChartPie } from "react-icons/hi";
+import { HiUser } from 'react-icons/hi'
+import { FaCrown } from "react-icons/fa";
+import logoLight from '../image/logo.png'
+import logoDark from '../image/logo2.png'
 
 function Header() {
     const path = useLocation().pathname;
@@ -35,9 +38,7 @@ function Header() {
     <Navbar className='border-b-2'>
         <Link to='/' className='self-center whitespace-nowrap 
         text-sm:text-xl font-semibold dark:text-white '>
-            <span className='px-2 py-1 bg-gradient-to-r from-indigo-500
-             via-purple-500 to-red-800 rounded-lg text-white'> Hazinofan-Info</span>
-            <span className='text-sm'>Blog</span> 
+            <img className="w-40" src={theme === 'dark' ? logoDark : logoLight} alt="logo" />
         </Link>
         <form > 
             <TextInput 
@@ -50,8 +51,15 @@ function Header() {
             <AiOutlineSearch />
         </Button>
         <div className='flex gap-2 md:order-2'>
+            <Link to='/pricing'>
+        <Button gradientDuoTone='purpleToPink' outline> <div className="flex gap-2 items-center">
+            <FaCrown className=" text-xl text-yellow-300"/> 
+            <p className=" mt-1 font-semibold"> Become a Postify Blogger </p> 
+            </div> 
+        </Button>
+        </Link>
             <Button     
-                className="w-12 h-10 hidden sm:inline" 
+                className="mt-1 w-12 h-10 hidden sm:inline" 
                 color='red' 
                 pill 
                 onClick={() => dispatch(toggleTheme())}
@@ -59,6 +67,7 @@ function Header() {
                 {theme === 'light' ? <FaRegSun /> :<FaMoon /> }
                 
             </Button>
+            
             {currentUser ? (
                 
                 <Dropdown
@@ -72,14 +81,18 @@ function Header() {
                         />
                     }>
                     <Dropdown.Header>
-                        <span className='block text-sm'>@{currentUser.username}</span>
+                        <span className='block text-sm mb-2'>@{currentUser.username}</span>
                         <span className='block text-sm font-medium truncate'>@{currentUser.email}</span>
                     </Dropdown.Header>
-                    <Link to={'/dashboard?tab=profile'}>
-                        <Dropdown.Item className='font-semibold'> Profile </Dropdown.Item>
+                    <Link to={'/dashboard?tab=dash'}>
+                        <Dropdown.Item className='font-semibold'> <HiChartPie className=' mr-3'/> Dashboard </Dropdown.Item>
                     </Link>
                     <DropdownDivider />
-                    <Dropdown.Item  className='font-semibold' onClick={handleSignOut}> Sign Out </Dropdown.Item>
+                    <Link to={'/dashboard?tab=profile'}>
+                        <Dropdown.Item className='font-semibold'> <HiUser className=' mr-3'/> Profile </Dropdown.Item>
+                    </Link>
+                    <DropdownDivider />
+                    <Dropdown.Item  className='font-semibold' onClick={handleSignOut}> <FaSignOutAlt className=' mr-3' /> Sign Out </Dropdown.Item>
                 </Dropdown>
             ) : 
             (

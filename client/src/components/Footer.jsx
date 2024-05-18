@@ -1,18 +1,20 @@
 import { Footer } from 'flowbite-react';
 import { Link } from 'react-router-dom';
 import { BsFacebook, BsInstagram, BsTwitter, BsGithub, BsDribbble } from 'react-icons/bs';
+import logoLight from '../image/logo.png'
+import logoDark from '../image/logo2.png'
+import { useSelector } from 'react-redux';
 export default function FooterCom() {
+  const { theme } = useSelector((state) => state.theme)
   return (
     <Footer container className='border border-t-8 border-teal-500'>
       <div className='w-full max-w-7xl mx-auto'>
         <div className='grid w-full justify-between sm:flex md:grid-cols-1'>
           <div className='mt-5'>
-            <Link to='/' className='self-center whitespace-nowrap 
-              text-sm:text-xl font-semibold dark:text-white '>
-              <span className='px-2 py-1 bg-gradient-to-r from-indigo-500
-              via-purple-500 to-red-800 rounded-lg text-white'> Hazinofan-Info</span>
-              <span className='text-sm'>Blog</span> 
-            </Link>
+          <Link to='/' className='self-center whitespace-nowrap 
+        text-sm:text-xl font-semibold dark:text-white '>
+            <img className="w-40" src={theme === 'dark' ? logoDark : logoLight} alt="logo" />
+        </Link>
           </div>
           <div className='grid grid-cols-2 gap-8 mt-4 sm:grid-cols-3 sm:gap-6'>
             <div>
