@@ -3,9 +3,12 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import CallToAction from '../components/CallToAction'
 import PostCard from '../components/PostCard'
+import { useSelector } from "react-redux";
+import meeting from '../image/meeting.jpg'
 
 function Home() {
   const [posts, setPosts] = useState([])
+  const { currentUser } = useSelector(state=>state.user)
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -27,15 +30,36 @@ function Home() {
         </p>
       <Link to="/search" className='text-xs sm:text-sm text-teal-500 font-bold hover:underline'>View All Posts</Link>
       </div>
+      {currentUser && !currentUser.isAdmin && !currentUser.isSub && (
       <div className=" p-3 bg-amber-100 dark:bg-slate-700">
         <CallToAction />
       </div>
+      )
+      }
+      {currentUser.isSub && (
+        <div className="relative font-[sans-serif] before:absolute before:w-full before:h-full before:inset-0 before:bg-black before:opacity-75 before:z-10">
+        <img src="https://img.freepik.com/free-vector/woman-work-office-sitting-desk-with-computer_107791-2522.jpg?t=st=1716062436~exp=1716066036~hmac=ae136404026c02b570b8792a0b5e0ed2f4837d3084524a4c80c7c9e907330969&w=1800" alt="Banner Image" className="absolute inset-0 w-full h-full object-cover" />
+        <div className="min-h-[300px] relative z-20 h-full max-w-6xl mx-auto flex flex-col justify-center items-center text-center text-white p-6">
+          <h2 className="sm:text-4xl text-2xl font-bold mb-6">YOU ARE A POSTIFY MEMBER</h2>
+          <p className="text-lg text-center text-gray-200">
+            Welcome to the Postify family! As a valued member, you now have full access to our website, where you can create engaging posts,
+            share your insights, and connect with other members. Explore the exclusive features in the members-only SuperSpace, where you'll
+            discover a host of cool tools and resources designed to enhance your experience. Start sharing your voice and take advantage of
+            everything Postify has to offer!
+          </p>
+          <a href="javascript:void(0)"
+            className="mt-8 bg-transparent text-white text-base font-semibold py-2.5 px-6 border-2 border-white rounded hover:bg-white hover:text-black transition duration-300 ease-in-out">
+            Members Super Space
+          </a>
+        </div>
+      </div>
+      )}
 
       <div className="max-w-5xl mx-auto p-3 flex flex-col gap-8 py-7">
         {
           posts && posts.length > 0 && (
             <div className="">
-              <h2 className="text-2xl font-semibold text-center"> Recent Posts</h2>
+              <h2 className="text-2xl font-semibold text-center mb-8 mt-14"> Recent Posts</h2>
               <div className="flex flex-wrap gap-4">
                 {posts.map((post) => (
                   <PostCard key={post._id} post={post} />

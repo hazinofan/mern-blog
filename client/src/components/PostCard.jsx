@@ -13,8 +13,8 @@ function PostCard({ post }) {
                 <span className='italic text-sm'>{post.category}</span>
                 <Link 
                 className='z-10 group-hover:bottom-0 absolute bottom-[-200px]
-                left-0 right-0 border border-red-500 text-red-500
-                hover:bg-red-400 hover:text-black transition-all
+                left-0 right-0 border border-teal-500 text-teal-500
+                hover:bg-blue-400 hover:text-black transition-all
                 duration-300 text-center py-2 rounded-md !rounded-tl-none m-2' to={`/post/${post.slug}`}>
                     Read Article
                 </Link>

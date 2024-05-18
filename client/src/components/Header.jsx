@@ -13,6 +13,7 @@ import { HiUser } from 'react-icons/hi'
 import { FaCrown } from "react-icons/fa";
 import logoLight from '../image/logo.png'
 import logoDark from '../image/logo2.png'
+import { MdPeopleAlt } from "react-icons/md";
 
 function Header() {
     const path = useLocation().pathname;
@@ -50,14 +51,25 @@ function Header() {
         <Button className='w-12 h-10 lg:hidden' color='gray' pill>
             <AiOutlineSearch />
         </Button>
-        <div className='flex gap-2 md:order-2'>
-            <Link to='/pricing'>
-        <Button gradientDuoTone='purpleToPink' outline> <div className="flex gap-2 items-center">
-            <FaCrown className=" text-xl text-yellow-300"/> 
-            <p className=" mt-1 font-semibold"> Become a Postify Blogger </p> 
-            </div> 
-        </Button>
+        <div className='flex gap-2 md:order-2' style={{alignItems: "center"}}>
+        {   !((currentUser?.isSub || currentUser?.isAdmin)) &&
+        <Link to='/pricing'>
+            <Button gradientDuoTone='purpleToPink' outline> <div className="flex gap-2 items-center">
+                <FaCrown className=" text-xl text-yellow-300"/> 
+                <p className=" mt-1 font-semibold"> Become a Postify Blogger </p> 
+                </div> 
+            </Button>
         </Link>
+        }
+        {
+            currentUser?.isSub && 
+            <div className="flex items-center gap-2 mt-2 mr-6">
+                <MdPeopleAlt className=" text-red-400 text-lg"/>
+                <p className=" font-semibold text-red-400 text-sm underline"> POSTIFY MEMBER </p> 
+            </div>
+        }
+        
+        
             <Button     
                 className="mt-1 w-12 h-10 hidden sm:inline" 
                 color='red' 
@@ -84,9 +96,16 @@ function Header() {
                         <span className='block text-sm mb-2'>@{currentUser.username}</span>
                         <span className='block text-sm font-medium truncate'>@{currentUser.email}</span>
                     </Dropdown.Header>
+                    {currentUser.isAdmin && (
                     <Link to={'/dashboard?tab=dash'}>
                         <Dropdown.Item className='font-semibold'> <HiChartPie className=' mr-3'/> Dashboard </Dropdown.Item>
                     </Link>
+                    )}
+                    {currentUser.isSub && (
+                    <Link to={'/dashboard?tab=dash'}>
+                        <Dropdown.Item className='font-semibold'> <HiChartPie className=' mr-3'/> Super Space </Dropdown.Item>
+                    </Link>
+                    )}
                     <DropdownDivider />
                     <Link to={'/dashboard?tab=profile'}>
                         <Dropdown.Item className='font-semibold'> <HiUser className=' mr-3'/> Profile </Dropdown.Item>

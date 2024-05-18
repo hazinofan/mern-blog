@@ -72,12 +72,9 @@ function PricingCardYear() {
             <span>Unlock access to all premium components on a weekly basis.</span>
         </li>
         </ul>
-            <div className="mt-6 flex justify-between gap-6">
-                <img className="w-16 lg:w-24" src="https://tailus.io/sources/blocks/organization/preview/images/clients/airbnb.svg" loading="lazy" alt="airbnb" />
-                <img className="w-8 lg:w-16" src="https://tailus.io/sources/blocks/organization/preview/images/clients/bissell.svg" loading="lazy" alt="bissell" />
-                <img className="w-6 lg:w-12" src="https://tailus.io/sources/blocks/organization/preview/images/clients/ge.svg" loading="lazy" alt="ge" />
-                <img className="w-20 lg:w-28" src="https://tailus.io/sources/blocks/organization/preview/images/clients/microsoft.svg" loading="lazy" alt="microsoft" />
-                    </div>
+        <div className="mt-6 flex items-center justify-center">
+                <img className="w-20 lg:w-72 " src="https://help.zazzle.com/hc/article_attachments/360010513393" loading="lazy" alt="microsoft" />
+            </div>
                 </div>
             </div>
         </div>

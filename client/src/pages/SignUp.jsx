@@ -2,12 +2,16 @@ import { Alert, Button, Label, Spinner, TextInput } from 'flowbite-react';
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Oauth from '../components/Oauth'
+import logoLight from '../image/logo.png'
+import logoDark from '../image/logo2.png'
+import { useSelector } from 'react-redux';
 
 
 function SignUp() {
   const [errorMessage, setErrorMessage ] = useState(null)
   const [loading, setLoading ] = useState(false)
   const[formData, setFormData] = useState({})
+  const { theme } = useSelector((state) => state.theme)
   const navigate = useNavigate() ;
   function handleChange(e) {
     setFormData({...formData,[e.target.id]: e.target.value.trim() })
@@ -46,13 +50,13 @@ function SignUp() {
 
   return (
     <div className='min-h-screen mt-20'>
-      <div className="flex p-3 max-w-3xl mx-auto flex-col md:flex-row md:items-center gap-5">
-        <div className="flex-1 text-center sm:text-left">
-          <Link to='/' className='font-bold dark:text-white text-3xl'>
-            <span className='px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-red-800 rounded-lg text-white'>Hazinofan-Info</span>
-            <span className='text-sm'>Blog</span>
-          </Link>
-          <p className='text-sm mt-5 font-semibold'>
+      <div className="flex p-3 max-w-3xl mx-auto flex-col md:flex-row md:items-center gap-8">
+      <div className="flex-1 text-center sm:text-left">
+        <Link className='self-center whitespace-nowrap 
+        text-sm:text-xl font-semibold dark:text-white '>
+            <img className=" w-80 mb-10" src={theme === 'dark' ? logoDark : logoLight} alt="logo" />
+        </Link>
+          <p className='text-sm mt-5 font-semibold text-center'>
             Discover a rich blog platform.
             Subscribe to share insights. All voices welcome.
             Join us today!
