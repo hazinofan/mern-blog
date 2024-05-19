@@ -95,7 +95,7 @@ function DashSide() {
 
             { currentUser?.isSub && (
               <Sidebar.Item
-              href='/dashboard?tab=posts'
+              href='/dashboard?tab=subposts'
               className='mb-3'
               active={tab === 'posts'}
               icon={HiDocumentText}
@@ -106,7 +106,7 @@ function DashSide() {
             )}
             { currentUser?.isSub && (
               <Sidebar.Item 
-              href='/Dashboard?tab=comments' 
+              href='/Dashboard?tab=subcomments' 
               className='mb-3' 
               active={tab === 'Comments'} 
               icon={LiaCommentSolid}

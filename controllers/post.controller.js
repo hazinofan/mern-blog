@@ -78,7 +78,7 @@ export const getposts = async (req, res, next) => {
 }
 
 export const deletepost = async (req, res, next) => {
-  if (!req.user.isAdmin || req.user.id !== req.params.userId) {
+  if (!(req.user.isAdmin || req.user.isSub || req.user.id === req.params.userId)) {
     return next(errorHandler(403, 'You are not allowed to delete this post'));
   }
   try {
@@ -89,8 +89,9 @@ export const deletepost = async (req, res, next) => {
   }
 };
 
+
 export const updatepost = async (req, res, next) => {
-  if (!req.user.isAdmin || req.user.id !== req.params.userId) {
+  if (!(req.user.isAdmin || req.user.isSub || req.user.id === req.params.userId)) {
     return next(errorHandler(403, 'You are not allowed to update this post'));
   }
   try {
@@ -161,6 +162,30 @@ export const getUserposts = async (req, res, next) => {
       lastMonthPosts,
     });
   } catch (error) {
+    next(error);
+  }
+};
+
+// getPostsByMonth controller in post.controller.js
+export const getPostsByMonth = async (req, res, next) => {
+  try {
+    const userId = req.user.id; // Get user ID from the request
+    const posts = await Post.aggregate([
+      { $match: { userId } }, // Filter by logged-in user's ID
+      {
+        $group: {
+          _id: { $month: "$createdAt" },
+          count: { $sum: 1 }
+        }
+      },
+      {
+        $sort: { _id: 1 }
+      }
+    ]);
+
+    res.status(200).json(posts);
+  } catch (error) {
+    console.error('Error fetching posts by month:', error);
     next(error);
   }
 };

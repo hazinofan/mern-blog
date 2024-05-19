@@ -50,3 +50,16 @@ body {
       display: grid;
     }
   }
+
+  @media (max-width: 767px) {
+    .responsive-container {
+      width: 400px;
+    }
+  }
+  
+  @media (min-width: 768px) {
+    .responsive-container {
+      width: 520px;
+    }
+  }
+  

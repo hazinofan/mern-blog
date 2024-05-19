@@ -47,10 +47,10 @@ function Home() {
             discover a host of cool tools and resources designed to enhance your experience. Start sharing your voice and take advantage of
             everything Postify has to offer!
           </p>
-          <a href="javascript:void(0)"
+          <Link to={'/dashboard?tab=dashsub'}
             className="mt-8 bg-transparent text-white text-base font-semibold py-2.5 px-6 border-2 border-white rounded hover:bg-white hover:text-black transition duration-300 ease-in-out">
             Members Super Space
-          </a>
+          </Link>
         </div>
       </div>
       )}
