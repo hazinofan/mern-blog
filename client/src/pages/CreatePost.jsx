@@ -54,30 +54,30 @@ function CreatePost() {
         }
     }
 
-    async function handleSubmit(e) {
-        e.preventDefault();
-        try {
-            const res = await fetch('/api/post/create', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify(formData),
-            });
-            const data = await res.json();
-            if (!res.ok) {
-              setPublishError(data.message);
-              return;
-            }
-      
-            if (res.ok) {
-              setPublishError(null);
-              navigate(`/post/${data.slug}`);
-            }
-          } catch (error) {
-            setPublishError('Something went wrong');
-          }
-    }
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      try {
+        const res = await fetch('/api/post/create', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+        });
+  
+        const data = await res.json();
+        if (!res.ok) {
+          setPublishError(data.message);
+          return;
+        }
+  
+        setPublishError(null);
+        navigate(`/post/${data.slug}`);
+      } catch (error) {
+        setPublishError('Something went wrong');
+        console.error('Error:', error.message);
+      }
+    };
     return (
       <div className='p-3 max-w-3xl mx-auto min-h-screen'>
           <h1 className='text-3xl my-7 font-semibold text-center'>Create a post</h1>

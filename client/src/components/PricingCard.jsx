@@ -2,11 +2,13 @@ import { Button } from 'flowbite-react';
 import React from 'react';
 import { IoShieldCheckmark } from "react-icons/io5";
 import { IoCheckmarkDoneSharp } from "react-icons/io5";
+import { useSelector } from 'react-redux';
 
 function PricingCardContent() {
+    const { theme } = useSelector((state) => state.theme);
   return (
         <div>
-        <div className="bg-gradient-to-b from-pink-100 to-purple-200">
+        <div className={`bg-gradient-to-b ${theme === 'light' ? 'bg-gradient-to-b from-pink-100 to-purple-200' : ''}`}>
         <div className="grid p-6 place-items-center">
         </div>
         <div className="container m-auto pb-20 px-6 md:px-12 lg:px-20">

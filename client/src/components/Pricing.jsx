@@ -5,13 +5,15 @@ import { IoCheckmarkDoneSharp } from "react-icons/io5";
 import { Switch } from '@headlessui/react';
 import PricingCardContent  from './PricingCard';
 import PricingCardYear from './PricingCardYear';
+import { useSelector } from 'react-redux';
 
 function Pricing() {
     const [enabled, setEnabled] = useState(false);
+    const { theme } = useSelector((state) => state.theme);
 
     return (
-            <div className='w-full bg-gradient-to-b from-pink-100 to-purple-200'>
-                <div className=' text-center pt-14'>
+        <div className={`w-full ${theme === 'light' ? 'bg-gradient-to-b from-pink-100 to-purple-200' : ''}`}>
+            <div className='text-center pt-14'>
                 <Switch
                     checked={enabled}
                     onChange={setEnabled}
@@ -23,10 +25,10 @@ function Pricing() {
                         className={`${enabled ? 'translate-x-9' : 'translate-x-0'} pointer-events-none inline-block h-[34px] w-[34px] transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out`}
                     />
                 </Switch>
-                </div>
+            </div>
 
-                {enabled ? (
-                    <PricingCardYear />
+            {enabled ? (
+                <PricingCardYear />
             ) : (
                 <PricingCardContent  />
             )}

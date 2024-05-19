@@ -68,17 +68,6 @@ function Header() {
                 <p className=" font-semibold text-red-400 text-sm underline"> POSTIFY MEMBER </p> 
             </div>
         }
-        
-        
-            <Button     
-                className="mt-1 w-12 h-10 hidden sm:inline" 
-                color='red' 
-                pill 
-                onClick={() => dispatch(toggleTheme())}
-            >
-                {theme === 'light' ? <FaRegSun /> :<FaMoon /> }
-                
-            </Button>
             
             {currentUser ? (
                 
@@ -102,7 +91,7 @@ function Header() {
                     </Link>
                     )}
                     {currentUser.isSub && (
-                    <Link to={'/dashboard?tab=dash'}>
+                    <Link to={'/dashboard?tab=dashsub'}>
                         <Dropdown.Item className='font-semibold'> <HiChartPie className=' mr-3'/> Super Space </Dropdown.Item>
                     </Link>
                     )}
@@ -123,6 +112,15 @@ function Header() {
             )}
             
             <Navbar.Toggle /> 
+            <Button     
+                className="mt-1 w-12 h-10 hidden sm:inline" 
+                color='red' 
+                pill 
+                onClick={() => dispatch(toggleTheme())}
+            >
+                {theme === 'light' ? <FaRegSun /> :<FaMoon /> }
+                
+            </Button>
         </div>
             <Navbar.Collapse>
                 <Navbar.Link active={path === '/'} as={'div'}>

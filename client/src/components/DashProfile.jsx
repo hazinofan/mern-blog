@@ -87,6 +87,11 @@ function DashProfile() {
           <span className='flex m-auto font-semibold justify-center mb-8 text-red-400'> Admin </span>
         )
       }
+      {
+        currentUser.isSub && (
+          <span className='flex m-auto font-semibold justify-center mb-8 text-red-400'> POSTIFY MEMBER </span>
+        )
+      }
       <form onSubmit={handleSubmit} className=' flex flex-col gap-4' >
         <div className='w-32 h-32 self-center cursor-pointer shadow-md overflow-hidden rounded-full'>
         <img 
@@ -102,7 +107,7 @@ function DashProfile() {
           {loading ? 'Loading...' : 'Update'}
         </Button>
         {
-        currentUser.isAdmin && (
+        (currentUser.isAdmin || currentUser?.isSub) && (
           <Link to='/create-post'>
           <Button 
           type='button'
@@ -142,7 +147,7 @@ function DashProfile() {
                 <h3 className="mb-5 text-lg text-gray-500 dark:text-gray-400"> Are you sure You want to delete Your Account </h3>
                 <div className="flex justify-center gap-4">
                   <Button color='failure' onClick={handleDeleteUser}>Yes i'm sure </Button>
-                  <Button color='gray' onClick={()=> setShowModal(false)}>Yes i'm sure </Button>
+                  <Button color='gray' onClick={()=> setShowModal(false)}> Cancel </Button>
                 </div>
                 </div>
               </Modal.Body>   

@@ -98,7 +98,7 @@ export const createComment = async (req, res, next) => {
     }}
     
     export const getComments = async (req, res, next) => {
-      if (!req.user.isAdmin) {
+      if (!(req.user.isAdmin || req.user.isSub)) {
         return next(errorHandler(403, 'You are not allowed to get all comments'));
       }
     
@@ -125,3 +125,36 @@ export const createComment = async (req, res, next) => {
         next(error);
       }
     }
+
+    // comment.controller.js
+export const getUserComments = async (req, res, next) => {
+  if (!(req.user.isAdmin || req.user.isSub)) {
+    return next(errorHandler(403, 'You are not allowed to get comments'));
+  }
+
+  try {
+    const userId = req.query.userId; // Get userId from query
+    const startIndex = parseInt(req.query.startIndex, 10) || 0;
+    const limit = parseInt(req.query.limit, 10) || 9;
+    const sortDirection = req.query.sort === 'desc' ? -1 : 1;
+
+    const now = new Date();
+    const oneMonthAgo = new Date();
+    oneMonthAgo.setMonth(now.getMonth() - 1);
+
+    const query = { userId }; // Filter by userId
+
+    const [comments, totalComments, lastMonthComments] = await Promise.all([
+      Comment.find(query)
+        .sort({ createdAt: sortDirection })
+        .skip(startIndex)
+        .limit(limit),
+      Comment.countDocuments(query), // Count total comments by user
+      Comment.countDocuments({ ...query, createdAt: { $gte: oneMonthAgo } }) // Count last month comments by user
+    ]);
+
+    res.status(200).json({ comments, totalComments, lastMonthComments });
+  } catch (error) {
+    next(error);
+  }
+};

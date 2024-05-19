@@ -30,13 +30,13 @@ function Home() {
         </p>
       <Link to="/search" className='text-xs sm:text-sm text-teal-500 font-bold hover:underline'>View All Posts</Link>
       </div>
-      {currentUser && !currentUser.isAdmin && !currentUser.isSub && (
+      {currentUser && !currentUser.isAdmin && !currentUser?.isSub && (
       <div className=" p-3 bg-amber-100 dark:bg-slate-700">
         <CallToAction />
       </div>
       )
       }
-      {currentUser.isSub && (
+      {currentUser?.isSub && (
         <div className="relative font-[sans-serif] before:absolute before:w-full before:h-full before:inset-0 before:bg-black before:opacity-75 before:z-10">
         <img src="https://img.freepik.com/free-vector/woman-work-office-sitting-desk-with-computer_107791-2522.jpg?t=st=1716062436~exp=1716066036~hmac=ae136404026c02b570b8792a0b5e0ed2f4837d3084524a4c80c7c9e907330969&w=1800" alt="Banner Image" className="absolute inset-0 w-full h-full object-cover" />
         <div className="min-h-[300px] relative z-20 h-full max-w-6xl mx-auto flex flex-col justify-center items-center text-center text-white p-6">

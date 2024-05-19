@@ -37,6 +37,14 @@ function DashSide() {
           console.log(error.message)
         }
     }
+    let label;
+      if (currentUser.isAdmin) {
+          label = 'Admin';
+      } else if (currentUser?.isSub) {
+          label = 'Super Space';
+      } else {
+          label = 'Profile';
+      }
   return (
     <Sidebar className='w-full md:w-56'>
         <Sidebar.ItemGroup className='flex flex-col'>
@@ -52,12 +60,23 @@ function DashSide() {
                 </Sidebar.Item>
             </Link>
             )}
+            {currentUser && currentUser.isSub && (
+                <Sidebar.Item
+                    href='/Dashboard?tab=dashsub'
+                    icon={HiChartPie}
+                    active={tab === 'dash' || !tab}
+                    labelColor='dark'
+                >
+                    Super Space
+                </Sidebar.Item>
+            )}
+            
             <Sidebar.Item 
             href='/Dashboard?tab=profile' 
             className='mb-3' 
             active={tab === 'profile'} 
             icon={HiUser} 
-            label={currentUser.isAdmin ? 'Admin' : 'User'} 
+            label={label} 
             labelColor='dark'
             >
                 Profile 
@@ -73,6 +92,28 @@ function DashSide() {
                    Posts
               </Sidebar.Item>
             ) }
+
+            { currentUser?.isSub && (
+              <Sidebar.Item
+              href='/dashboard?tab=posts'
+              className='mb-3'
+              active={tab === 'posts'}
+              icon={HiDocumentText}
+
+              >
+                Sub Posts
+              </Sidebar.Item>
+            )}
+            { currentUser?.isSub && (
+              <Sidebar.Item 
+              href='/Dashboard?tab=comments' 
+              className='mb-3' 
+              active={tab === 'Comments'} 
+              icon={LiaCommentSolid}
+              > 
+                 Sub Comments
+              </Sidebar.Item>
+            )}
 
             {currentUser.isAdmin && (
               <>
