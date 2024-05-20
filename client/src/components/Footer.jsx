@@ -32,7 +32,7 @@ export default function FooterCom() {
                   target='_blank'
                   rel='noopener noreferrer'
                 >
-                  Hazinofan's Blog
+                  Postify's Blog
                 </Footer.Link>
               </Footer.LinkGroup>
             </div>

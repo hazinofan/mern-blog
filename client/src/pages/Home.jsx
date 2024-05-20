@@ -30,15 +30,15 @@ function Home() {
         </p>
       <Link to="/search" className='text-xs sm:text-sm text-teal-500 font-bold hover:underline'>View All Posts</Link>
       </div>
-      {currentUser && !currentUser.isAdmin && !currentUser?.isSub && (
-      <div className=" p-3 bg-amber-100 dark:bg-slate-700">
-        <CallToAction />
-      </div>
-      )
-      }
-      {currentUser?.isSub && (
-        <div className="relative font-[sans-serif] before:absolute before:w-full before:h-full before:inset-0 before:bg-black before:opacity-75 before:z-10">
-        <img src="https://img.freepik.com/free-vector/woman-work-office-sitting-desk-with-computer_107791-2522.jpg?t=st=1716062436~exp=1716066036~hmac=ae136404026c02b570b8792a0b5e0ed2f4837d3084524a4c80c7c9e907330969&w=1800" alt="Banner Image" className="absolute inset-0 w-full h-full object-cover" />
+      
+      {currentUser?.isSub ? (
+    <div className="relative font-[sans-serif]">
+      <div className="before:absolute before:w-full before:h-full before:inset-0 before:bg-black before:opacity-75 before:z-10">
+        <img
+          src="https://img.freepik.com/free-vector/woman-work-office-sitting-desk-with-computer_107791-2522.jpg?t=st=1716062436~exp=1716066036~hmac=ae136404026c02b570b8792a0b5e0ed2f4837d3084524a4c80c7c9e907330969&w=1800"
+          alt="Banner Image"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
         <div className="min-h-[300px] relative z-20 h-full max-w-6xl mx-auto flex flex-col justify-center items-center text-center text-white p-6">
           <h2 className="sm:text-4xl text-2xl font-bold mb-6">YOU ARE A POSTIFY MEMBER</h2>
           <p className="text-lg text-center text-gray-200">
@@ -47,13 +47,20 @@ function Home() {
             discover a host of cool tools and resources designed to enhance your experience. Start sharing your voice and take advantage of
             everything Postify has to offer!
           </p>
-          <Link to={'/dashboard?tab=dashsub'}
-            className="mt-8 bg-transparent text-white text-base font-semibold py-2.5 px-6 border-2 border-white rounded hover:bg-white hover:text-black transition duration-300 ease-in-out">
+          <Link
+            to="/dashboard?tab=dashsub"
+            className="mt-8 bg-transparent text-white text-base font-semibold py-2.5 px-6 border-2 border-white rounded hover:bg-white hover:text-black transition duration-300 ease-in-out"
+          >
             Members Super Space
-          </Link>
-        </div>
-      </div>
-      )}
+                  </Link>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div className="p-3 bg-amber-100 dark:bg-slate-700">
+              <CallToAction />
+            </div>
+          )}
 
       <div className="max-w-5xl mx-auto p-3 flex flex-col gap-8 py-7">
         {

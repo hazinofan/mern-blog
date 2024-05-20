@@ -128,14 +128,14 @@ function Header() {
                         Home
                     </Link>
                 </Navbar.Link>
-                <Navbar.Link active={path === '/About'} as={'div'}>
-                    <Link to='/About'>
-                        About
-                    </Link>
-                </Navbar.Link>
                 <Navbar.Link active={path === '/Projects'} as={'div'}>
                     <Link to='/Projects'>
                         Projects
+                    </Link>
+                </Navbar.Link>
+                <Navbar.Link active={path === '/About'} as={'div'}>
+                    <Link to='/About'>
+                        About
                     </Link>
                 </Navbar.Link>
             </Navbar.Collapse>
