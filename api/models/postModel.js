@@ -17,7 +17,7 @@ const postSchema = new mongoose.Schema(
     },
     image: {
       type: String,
-      default: 'https://firebasestorage.googleapis.com/v0/b/mern-blog-ae86a.appspot.com/o/1716157141032_Untitled%20design.jpg?alt=media&token=095751a8-d54c-40e0-80c0-6515c78026f4'
+      default: 'http://localhost:5173/images/postifyPost.jpg'
     },
     category: {
       type: String,

@@ -1,7 +1,7 @@
 import { FaSignOutAlt } from "react-icons/fa";
 import { Avatar, Button, Dropdown, DropdownDivider, Navbar, TextInput } from 'flowbite-react'
-import {Link, useLocation} from 'react-router-dom'
-import React, { useState } from 'react'
+import {Link, useLocation, useNavigate} from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
 import { AiOutlineSearch } from "react-icons/ai";
 import { FaMoon } from "react-icons/fa";
 import { FaRegSun } from "react-icons/fa6";
@@ -17,9 +17,30 @@ import { MdPeopleAlt } from "react-icons/md";
 
 function Header() {
     const path = useLocation().pathname;
+    const location = useLocation()
     const dispatch = useDispatch() ;
+    const navigate = useNavigate()
     const { theme } = useSelector((state) => state.theme)
     const {currentUser} = useSelector(state => state.user)
+    const [searchTerm, setSearchTerm] = useState('')
+
+    useEffect(() => {
+        const urlParams = new URLSearchParams(location.search)
+        const searchTermFromUrl = urlParams.get('searchTerm')
+        if(searchTermFromUrl) {
+            setSearchTerm(searchTermFromUrl)
+        }
+    },[location.search])
+
+    function handleSubmit(e){
+        e.preventDefault()
+        const urlParams = new URLSearchParams(location.search)
+        urlParams.set('searchTerm', searchTerm)
+        const searchQuery = urlParams.toString()
+        navigate(`/search?${searchQuery}`)
+    }
+
+
     const handleSignOut = async () => {
         try {
           const res = await fetch('api/user/signout', {
@@ -35,17 +56,21 @@ function Header() {
           console.log(error.message)
         }
     }
+
+    
   return (
     <Navbar className='border-b-2'>
         <Link to='/' className='self-center whitespace-nowrap 
         text-sm:text-xl font-semibold dark:text-white '>
             <img className="w-40" src={theme === 'dark' ? logoDark : logoLight} alt="logo" />
         </Link>
-        <form > 
+        <form onSubmit={handleSubmit}> 
             <TextInput 
             className='hidden lg:inline'
             type='text'
             placeholder='Search...'
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
             rightIcon={AiOutlineSearch }/>
         </form>
         <Button className='w-12 h-10 lg:hidden' color='gray' pill>
@@ -129,8 +154,8 @@ function Header() {
                     </Link>
                 </Navbar.Link>
                 <Navbar.Link active={path === '/Projects'} as={'div'}>
-                    <Link to='/Projects'>
-                        Projects
+                    <Link to='/search'>
+                        Postify Space
                     </Link>
                 </Navbar.Link>
                 <Navbar.Link active={path === '/About'} as={'div'}>

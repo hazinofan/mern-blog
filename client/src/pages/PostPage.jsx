@@ -90,13 +90,11 @@ function PostPage() {
       {currentUser?.isSub && (
          <div class=" border-t-2 items-center w-10/12 grid-cols-2 mx-auto overflow-x-hidden lg:grid md:py-14 lg:py-24 xl:py-14 lg:mt-3 xl:mt-5" data-aos="fade-right" data-aos-duration="800">
          <div class="pr-2 md:mb-14 py-14 md:py-0">
-           <h1 class="text-3xl font-semibold text-blue-900 xl:text-5xl lg:text-3xl"><span class="block w-full">Get a financial experience</span> for growing your business!</h1>
+           <h1 class="text-3xl font-semibold text-blue-900 xl:text-5xl lg:text-3xl"><span class="block w-full">Get More Traffic</span> for growing your business!</h1>
            <p class="py-4 text-lg text-gray-500 2xl:py-8 md:py-6 2xl:pr-5">
-             Empowering you to make better financial decisions, We truly are professional money planners...
+             Post Posts and Start showing your products to World 
            </p>
-           <div class="mt-4">
-             <a href="#contact" class="px-5 py-3 text-lg tracking-wider text-white bg-blue-500 rounded-lg md:px-8 hover:bg-blue-600 group"><span>Explore More</span> </a>
-           </div>
+          
          </div>
  
          <div class="pb-10 overflow-hidden md:p-10 lg:p-0 sm:pb-0">

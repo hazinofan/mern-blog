@@ -79,6 +79,7 @@ function DashUsers() {
               <TableHeadCell>Username</TableHeadCell>
               <TableHeadCell>Email</TableHeadCell>
               <TableHeadCell>Admin</TableHeadCell>
+              <TableHeadCell>Subscriber</TableHeadCell>
               <TableHeadCell>Date Created</TableHeadCell>
               <TableHeadCell>Action</TableHeadCell>
             </TableHead>
@@ -95,6 +96,7 @@ function DashUsers() {
                     <Table.Cell>{user.username}</Table.Cell>
                     <Table.Cell>{user.email}</Table.Cell>
                     <Table.Cell>{user.isAdmin ? (<FaCheck className='  text-green-500'/>) : (<FaTimes className=' text-red-500' /> )}</Table.Cell>
+                    <Table.Cell>{user?.isSub ? (<FaCheck className='  text-green-500'/>) : (<FaTimes className=' text-red-500' /> )}</Table.Cell>
                     <Table.Cell>{new Date(user.createdAt).toLocaleDateString()}</Table.Cell>
                     <Table.Cell>
                       <span onClick={() => {
