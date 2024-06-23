@@ -5,6 +5,7 @@ import PostCard from '../components/PostCard';
 import Ads from '../components/Ads';
 import { useSelector } from 'react-redux';
 import GoPremium from '../components/GoPremium';
+import { Helmet } from 'react-helmet';
 
 function Search() {
     const [sideBarData, setSideBarData] = useState({
@@ -86,6 +87,11 @@ function Search() {
 
     return (
         <div className='flex flex-col md:flex-row'>
+            <Helmet>
+                <title>{`Search Results for ${sideBarData.searchTerm || 'Posts'} | POSTIFY`}</title>
+                <meta name="description" content={`Browse posts related to ${sideBarData.searchTerm || 'various topics'} on POSTIFY. Discover insightful articles and valuable information.`} />
+                <meta name="keywords" content="blog, search, posts, articles, POSTIFY, blogging, latest posts" />
+            </Helmet>
             <div className="p-7 border-b md:border-r md:min-h-screen border-gray-300 dark:border-gray-600">
                 <form className='flex flex-col gap-8' onSubmit={handleSubmit}>
                     <div className="flex items-center gap-2">
@@ -133,7 +139,7 @@ function Search() {
                         loading && <p className='text-xl text-gray-500'>Loading ...</p>
                     }
                     {
-                        !loading && posts && posts.map((post) => 
+                        !loading && posts && posts.map((post) =>
                         <PostCard key={post._id} post={post} />)
                     }
                     {showMore && !loading && (

@@ -3,6 +3,7 @@ import React from 'react';
 import { IoShieldCheckmark } from "react-icons/io5";
 import { IoCheckmarkDoneSharp } from "react-icons/io5";
 import { useSelector } from 'react-redux';
+import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js';
 
 function PricingCardContent() {
     const { theme } = useSelector((state) => state.theme);
@@ -24,7 +25,7 @@ function PricingCardContent() {
             <div>
                 <div className="relative flex justify-around">
                     <div className="flex items-end">
-                        <span className="text-8xl text-gray-800 font-bold leading-0">8</span>
+                        <span className="text-8xl text-gray-800 font-bold leading-0">10</span>
                         <div className="pb-2">
                             <span className="block text-2xl text-gray-700 font-bold">$</span>
                             <span className="block text-xl text-purple-500 font-bold">Per Month</span>
@@ -48,8 +49,21 @@ function PricingCardContent() {
             </ul>
             <p className="flex items-center justify-center space-x-4 text-lg text-gray-600 text-center">
             </p>
-            <Button className='w-full h-12' gradientDuoTone='purpleToPink' outline> <span className=' font-semibold text-lg'> Choose the Plan</span>
-            </Button>
+            <div className="flex justify-center mt-8">
+            <PayPalScriptProvider options={{ "client-id": "AeqP9hZoOWOjXbQqkj75UHTytXX9zf8awwLzf3Omy9UhSdwPFrLLFOgGqLnf86DGf-rYwapdUa68bjEG", vault: true }}>
+                <PayPalButtons                             
+                    createSubscription={(data, actions) => {
+                        return actions.subscription.create({
+                            plan_id: 'P-5KY49246BG563040NMZISUTA',
+                        });
+                    }}
+                    onApprove={(data, actions) => {
+                        console.log('Subscription approved:', data);
+                    }}
+                />
+            </PayPalScriptProvider>
+
+            </div>
         </div>
         </div>
 

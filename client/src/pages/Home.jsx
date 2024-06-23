@@ -5,6 +5,7 @@ import CallToAction from '../components/CallToAction';
 import PostCard from '../components/PostCard';
 import { useSelector } from "react-redux";
 import GoPremium from "../components/GoPremium";
+import { Helmet } from 'react-helmet';
 
 function Home() {
   const [posts, setPosts] = useState([]);
@@ -21,6 +22,12 @@ function Home() {
 
   return (
     <div>
+      <Helmet>
+        <title>Home | POSTIFY - Your Blogging Platform</title>
+        <meta name="description" content="Welcome to POSTIFY. Explore a diverse array of blogs covering various topics and categories. Join our community and discover valuable insights." />
+        <meta name="keywords" content="blogs, blogging, blog platform, postify, articles, business reviews, in-depth articles, quick reads, blogging community" />
+      </Helmet>
+
       <div className="flex flex-col gap-6 p-28 px-3 max-w-6xl mx-auto">
         <h1 className='text-3xl font-bold lg:text-6xl'> Welcome To POSTIFY </h1>
         <p className='text-gray-500 text-xs sm:text-sm'>
@@ -63,7 +70,6 @@ function Home() {
         </div>
       )}
       
-
       <div className="max-w-5xl mx-auto p-3 flex flex-col gap-8 py-7 justify-center items-center">
         {posts && posts.length > 0 && (
           <div className="">
@@ -77,7 +83,6 @@ function Home() {
         )}
         <Link to="/search" className='flex items-center gap-2 text-3xl sm:text-sm text-teal-500 font-bold hover:underline'> View All Posts <FaArrowRight /> </Link>
         {!currentUser?.isSub && !currentUser?.isAdmin && <GoPremium />}
-        
       </div>
     </div>
   );

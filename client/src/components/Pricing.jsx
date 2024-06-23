@@ -3,9 +3,10 @@ import React, { useState } from 'react';
 import { IoShieldCheckmark } from "react-icons/io5";
 import { IoCheckmarkDoneSharp } from "react-icons/io5";
 import { Switch } from '@headlessui/react';
-import PricingCardContent  from './PricingCard';
+import PricingCardContent from './PricingCard';
 import PricingCardYear from './PricingCardYear';
 import { useSelector } from 'react-redux';
+import { Helmet } from 'react-helmet';
 
 function Pricing() {
     const [enabled, setEnabled] = useState(false);
@@ -13,6 +14,10 @@ function Pricing() {
 
     return (
         <div className={`w-full ${theme === 'light' ? 'bg-gradient-to-b from-pink-100 to-purple-200' : ''}`}>
+            <Helmet>
+                <title>Pricing Page</title>
+                <meta name="description" content="Discover our pricing options tailored to meet your needs. Choose between monthly and yearly plans." />
+            </Helmet>
             <div className='text-center pt-14'>
                 <Switch
                     checked={enabled}
@@ -30,7 +35,7 @@ function Pricing() {
             {enabled ? (
                 <PricingCardYear />
             ) : (
-                <PricingCardContent  />
+                <PricingCardContent />
             )}
         </div>
     );

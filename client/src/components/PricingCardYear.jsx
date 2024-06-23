@@ -1,8 +1,8 @@
-import { Button } from 'flowbite-react';
 import React from 'react';
 import { IoShieldCheckmark } from "react-icons/io5";
 import { IoCheckmarkDoneSharp } from "react-icons/io5";
 import { useSelector } from 'react-redux';
+import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js';
 
 function PricingCardYear() {
     const { theme } = useSelector((state) => state.theme);
@@ -48,8 +48,21 @@ function PricingCardYear() {
             </ul>
             <p className="flex items-center justify-center space-x-4 text-lg text-gray-600 text-center">
             </p>
-            <Button className='w-full h-12' gradientDuoTone='purpleToPink' outline> <span className=' font-semibold text-lg'> Choose the Plan</span>
-            </Button>
+            <div className="flex justify-center mt-8">
+            <PayPalScriptProvider options={{ "client-id": "AeqP9hZoOWOjXbQqkj75UHTytXX9zf8awwLzf3Omy9UhSdwPFrLLFOgGqLnf86DGf-rYwapdUa68bjEG", vault: true }}>
+                <PayPalButtons                             
+                    createSubscription={(data, actions) => {
+                        return actions.subscription.create({
+                            plan_id: 'P-7K345900LP901020VMZISXNA',
+                        });
+                    }}
+                    onApprove={(data, actions) => {
+                        console.log('Subscription approved:', data);
+                    }}
+                />
+            </PayPalScriptProvider>
+
+            </div>
         </div>
         </div>
 

@@ -1,4 +1,13 @@
-import mongoose from "mongoose";    
+import mongoose from "mongoose";  
+
+const profilePictures = [
+    "http://localhost:5173/images/pp1.jpg",
+    "http://localhost:5173/images/pp2.jpg",
+    "http://localhost:5173/images/pp3.jpg",
+    "http://localhost:5173/images/pp4.jpg",
+    "http://localhost:5173/images/pp5.jpg",
+];
+
 
 const userSchema = new mongoose.Schema({
     username :{
@@ -14,9 +23,11 @@ const userSchema = new mongoose.Schema({
         type : String,
         required : true,
     },
-    ProfilPicture :{
-        type : String,
-        default : "https://styles.redditmedia.com/t5_2qh4a/styles/communityIcon_7kecd4uf4a3c1.png",
+    ProfilPicture: {
+        type: String,
+        default: function() {
+            return profilePictures[Math.floor(Math.random() * profilePictures.length)];
+        },
     },
     isAdmin: {
         type: Boolean,

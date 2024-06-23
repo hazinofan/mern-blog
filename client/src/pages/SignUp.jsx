@@ -52,9 +52,9 @@ function SignUp() {
     <div className='min-h-screen mt-20'>
       <div className="flex p-3 max-w-3xl mx-auto flex-col md:flex-row md:items-center gap-8">
       <div className="flex-1 text-center sm:text-left">
-        <Link className='self-center whitespace-nowrap 
+      <Link className='self-center whitespace-nowrap 
         text-sm:text-xl font-semibold dark:text-white '>
-            <img className=" w-80 mb-10" src={theme === 'dark' ? logoDark : logoLight} alt="logo" />
+            <img className=" w-80 mb-10" src="https://tecdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg " alt="logo" />
         </Link>
           <p className='text-sm mt-5 font-semibold text-center'>
             Discover a rich blog platform.
@@ -64,6 +64,10 @@ function SignUp() {
         </div>
 
         <div className="flex flex-col flex-1 gap-4">
+        <Link className='self-center whitespace-nowrap 
+        text-sm:text-xl font-semibold dark:text-white '>
+            <img className=" w-80 mb-10" src={theme === 'dark' ? logoDark : logoLight} alt="logo" />
+        </Link>
           <form className='flex flex-col gap-4' onSubmit={handleSubmit}>
             <div className='mb-2'>
               <Label value='Your Username :' />
