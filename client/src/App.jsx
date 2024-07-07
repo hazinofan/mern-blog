@@ -3,7 +3,6 @@ import {Route, Routes, BrowserRouter} from "react-router-dom"
 import Home from './pages/Home'
 import About from './pages/About'
 import Dashboard from './pages/Dashboard'
-import Projects from './pages/Projects'
 import SignIn from './pages/SignIn'
 import SignUp from './pages/SignUp'
 import Header from './components/Header'
@@ -17,6 +16,7 @@ import PostPage from './pages/PostPage'
 import ScrollToTop from './components/ScrollToTop'
 import Pricing from './components/Pricing'
 import Search from './pages/Search'
+import PrivacyPolicy from './pages/PrivacyPolicy'
 
 function App() {
   return (
@@ -26,7 +26,6 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />}/>
         <Route path='/about' element={<About />}/>
-        <Route path='/Projects' element={<Projects />}/>
         <Route element={<PrivateRoute />}>
         <Route path='/Dashboard' element={<Dashboard />}/>
         </Route>
@@ -39,6 +38,7 @@ function App() {
         <Route path='/SignIn' element={<SignIn />}/>
         <Route path='/search' element={<Search />}/>
         <Route path='/SignUp' element={<SignUp />}/>
+        <Route path='/privacypolicy' element={<PrivacyPolicy />}/>
         <Route path='/post/:postSlug' element={<PostPage />}/>
         <Route path='/errorNavPage' element={<ErrorNavPage />}/>
         <Route path='/pricing' element={<Pricing />}/>

@@ -3,9 +3,13 @@ import { IoShieldCheckmark } from "react-icons/io5";
 import { IoCheckmarkDoneSharp } from "react-icons/io5";
 import { useSelector } from 'react-redux';
 import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js';
+import { useDispatch } from 'react-redux'
 
 function PricingCardYear() {
     const { theme } = useSelector((state) => state.theme);
+    const {currentUser,error, loading } = useSelector(state => state.user)
+    const dispatch = useDispatch()
+
   return (
         <div>
         <div className={`bg-gradient-to-b ${theme === 'light' ? 'bg-gradient-to-b from-pink-100 to-purple-200' : ''}`}>
@@ -49,15 +53,25 @@ function PricingCardYear() {
             <p className="flex items-center justify-center space-x-4 text-lg text-gray-600 text-center">
             </p>
             <div className="flex justify-center mt-8">
-            <PayPalScriptProvider options={{ "client-id": "AeqP9hZoOWOjXbQqkj75UHTytXX9zf8awwLzf3Omy9UhSdwPFrLLFOgGqLnf86DGf-rYwapdUa68bjEG", vault: true }}>
+            <PayPalScriptProvider options={{ "client-id": "AZ37ofl88r4UNgKbFRD5YVtmPj93xAV05hUhvbsH7U40kbYtagc7rxAlQzp-_7ZqilGLTZnvCbCWW3X4", vault: true }}>
                 <PayPalButtons                             
                     createSubscription={(data, actions) => {
                         return actions.subscription.create({
-                            plan_id: 'P-7K345900LP901020VMZISXNA',
+                            plan_id: 'P-1HC23219MS0661154MZ3RK6A',
                         });
                     }}
-                    onApprove={(data, actions) => {
-                        console.log('Subscription approved:', data);
+                    onApprove={ async (data, actions) => {
+                        const res = await fetch(`/api/user/update/${currentUser._id}`, {
+                            method: 'PUT',
+                            headers: {
+                              'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({isSub: true}),
+                        });                        
+                        if (res.ok) {
+                          dispatch(updateSuccess({...currentUser, isSub: true}));
+                        }
+
                     }}
                 />
             </PayPalScriptProvider>
