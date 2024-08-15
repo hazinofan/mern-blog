@@ -66,7 +66,7 @@ function PostPage() {
       <Helmet>
         <title>{post ? post.title : "Post"} | POSTIFY</title>
         <meta name="description" content={post ? post.excerpt : "Read the latest posts on POSTIFY"} />
-        <meta name="keywords" content="blog, post, article, POSTIFY, blogging, latest posts" />
+        <meta name="keywords" content="blog, blog post, blog post examples, POSTIFY, how to write a blog post, blog post example" />
       </Helmet>
       
       <h1 className='text-3xl mt-10 p-3 text-center font-serif max-w-2xl mx-auto lg:text-4xl'>

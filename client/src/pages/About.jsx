@@ -12,9 +12,50 @@ function About() {
   return (
     <div>
         <Helmet>
-            <title>About Postify - Your Platform for Business Information</title>
-            <meta name="description" content="Welcome to Postify, your go-to destination for daily news updates and a platform to share insights about your businesses. Join us today and become part of a vibrant community committed to knowledge-sharing and collaborative growth." />
-        </Helmet>
+                {/* Primary SEO Meta Tags */}
+                <title>About Postify - Business Insights & Daily News Updates</title>
+                <meta name="description" content="Discover Postify: your platform for daily news, business insights, and knowledge-sharing. Join our community and elevate your business." />
+                <meta name="keywords" content="Postify, what is the purpose of using blogs on websites, best blog website, best blog websites, how to start a wordpress blog website, websites blogs, best blog website builder" />
+                <meta name="robots" content="index, follow" />
+                
+                {/* Open Graph Meta Tags */}
+                <meta property="og:title" content="About Postify - Business Insights & Daily News Updates" />
+                <meta property="og:description" content="Discover Postify: your platform for daily news, business insights, and knowledge-sharing. Join our community and elevate your business." />
+                <meta property="og:image" content="https://pbs.twimg.com/profile_banners/1823794069962629120/1723661925/1500x500" />
+                <meta property="og:url" content="https://www.postifyblog.com/about" />
+                <meta property="og:type" content="website" />
+                
+                {/* Twitter Card Meta Tags */}
+                <meta name="twitter:card" content="https://pbs.twimg.com/profile_images/1823796295091245060/rJtjydZ2_400x400.png" />
+                <meta name="twitter:title" content="About Postify - Business Insights & Daily News Updates" />
+                <meta name="twitter:description" content="Discover Postify: your platform for daily news, business insights, and knowledge-sharing. Join our community and elevate your business." />
+                <meta name="twitter:image" content="https://pbs.twimg.com/profile_images/1823796295091245060/rJtjydZ2_400x400.png" />
+                
+                {/* Canonical Link */}
+                <link rel="canonical" href="https://www.postifyblog.com/about" />
+                
+                {/* Structured Data (JSON-LD) */}
+                <script type="application/ld+json">
+                    {`
+                    {
+                      "@context": "https://schema.org",
+                      "@type": "WebPage",
+                      "name": "About Postify",
+                      "description": "Discover Postify: your platform for daily news, business insights, and knowledge-sharing.",
+                      "url": "https://www.postifyblog.com/about",
+                      "image": "",
+                      "publisher": {
+                        "@type": "Postify",
+                        "name": "Postify",
+                        "logo": {
+                          "@type": "ImageObject",
+                          "url": "https://pbs.twimg.com/profile_images/1823796295091245060/rJtjydZ2_400x400.png"
+                        }
+                      }
+                    }
+                    `}
+                </script>
+            </Helmet>
     <section className="bg-white dark:bg-gray-900">
     <div className="grid max-w-screen-xl px-4 pt-20 pb-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12 lg:pt-28">
         <div className="mr-auto place-self-center lg:col-span-7">

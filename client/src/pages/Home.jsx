@@ -25,7 +25,7 @@ function Home() {
       <Helmet>
         <title>Home | POSTIFY - Your Blogging Platform</title>
         <meta name="description" content="Welcome to POSTIFY. Explore a diverse array of blogs covering various topics and categories. Join our community and discover valuable insights." />
-        <meta name="keywords" content="blogs, blogging, blog platform, postify, articles, business reviews, in-depth articles, quick reads, blogging community" />
+        <meta name="keywords" content="blogs, best blogging platform , free blog platforms, postify, best blog platforms, best free blogging platform, best blogging platform to make money, best free blog platforms, good free blogging platforms" />
       </Helmet>
 
       <div className="flex flex-col gap-6 p-28 px-3 max-w-6xl mx-auto">

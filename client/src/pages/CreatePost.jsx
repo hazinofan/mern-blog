@@ -80,6 +80,11 @@ function CreatePost() {
     };
     return (
       <div className='p-3 max-w-3xl mx-auto min-h-screen'>
+        <Helmet>
+          <title>Create a Post - Postify Blog </title>
+          <meta name="description" content="Create and publish a new blog post with images, categories, and more." />
+          <meta name="keywords" content="sex blog usa, blog usa, usa soccer blog, categories, blogs in usa, seo blog" />
+        </Helmet>
           <h1 className='text-3xl my-7 font-semibold text-center'>Create a post</h1>
           <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
               <div className="flex flex-col gap-4 sm:flex-row justify-between"> 
