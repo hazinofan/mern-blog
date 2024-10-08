@@ -7,6 +7,7 @@ import {app} from '../firebase'
 import { useNavigate } from 'react-router-dom';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
+import { Helmet } from 'react-helmet';
 
 
 function CreatePost() {
